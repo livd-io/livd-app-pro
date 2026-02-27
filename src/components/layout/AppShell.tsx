@@ -30,7 +30,9 @@ function classNames(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-const iconByHref: Record<string, any> = {
+import type { ComponentType } from "react";
+
+const iconByHref: Record<string, ComponentType<{ className?: string }>> = {
   "/app": HomeIcon,
   "/app/users": UsersIcon,
   "/app/settings": Cog6ToothIcon,

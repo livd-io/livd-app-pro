@@ -1,3 +1,36 @@
+# Livd App Pro
+
+CI verified on 27 February 2026.
+
+# Livd App Pro
+
+## Requirements
+
+- Node.js 20+
+- npm
+
+## Local Development
+
+```bash
+npm ci
+npm run dev
+```
+
+## Environment Variables
+
+The following environment variables are required (set in your `.env.local`):
+
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+## Deploy
+
+- Hosted on Vercel
+- The `main` branch deploys to production
+- Pull requests create preview deployments
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

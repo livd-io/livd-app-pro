@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [apps/app, apps/marketing]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
@@ -15,14 +18,14 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: apps/app/package-lock.json
+          cache-dependency-path: ${{ matrix.app }}/package-lock.json
       - run: npm ci
-        working-directory: apps/app
+        working-directory: ${{ matrix.app }}
       - run: npm run lint --if-present
-        working-directory: apps/app
-      - name: Build with Supabase env
+        working-directory: ${{ matrix.app }}
+      - name: Build
         run: npm run build
-        working-directory: apps/app
+        working-directory: ${{ matrix.app }}
         env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ matrix.app == 'apps/app' && secrets.NEXT_PUBLIC_SUPABASE_URL || '' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ matrix.app == 'apps/app' && secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || '' }}

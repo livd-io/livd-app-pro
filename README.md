@@ -2,7 +2,36 @@
 
 CI verified on 27 February 2026.
 
-# Livd App Pro
+## Project Structure
+
+```
+livd-app-pro/                          # Monorepo root
+├── .github/
+│   └── workflows/
+│       └── ci.yml                     # GitHub Actions CI workflow
+├── apps/
+│   └── app/                           # Next.js application
+│       ├── public/                    # Static assets (SVGs, logo)
+│       ├── src/
+│       │   ├── app/                   # Next.js App Router
+│       │   │   ├── (app)/             # Authenticated app routes
+│       │   │   │   └── app/
+│       │   │   │       ├── dashboard/ # Dashboard page
+│       │   │   │       ├── settings/  # Settings page
+│       │   │   │       └── users/     # Users page
+│       │   │   ├── (auth)/            # Authentication routes
+│       │   │   │   └── login/         # Login page & form
+│       │   │   ├── (public)/          # Public-facing routes
+│       │   │   └── api/
+│       │   │       └── whoami/        # Current-user API route
+│       │   ├── components/
+│       │   │   └── layout/            # Layout components (AppShell)
+│       │   ├── lib/
+│       │   │   └── supabase/          # Supabase client & server helpers
+│       │   └── types/                 # Shared TypeScript types (RBAC)
+│       └── tests/                     # Playwright end-to-end tests
+└── README.md
+```
 
 ## Requirements
 

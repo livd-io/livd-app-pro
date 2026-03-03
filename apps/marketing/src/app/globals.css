@@ -1,1 +1,87 @@
 @import "tailwindcss";
+
+/* ─── Söhne self-hosted font ──────────────────────────────── */
+@font-face {
+	font-family: "Soehne";
+	src: url("/fonts/soehne/Soehne-Buch.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Soehne";
+	src: url("/fonts/soehne/Soehne-Kraftig.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Soehne";
+	src: url("/fonts/soehne/Soehne-Halbfett.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* ─── Design tokens ───────────────────────────────────────── */
+:root {
+	--background: #09090b;   /* zinc-950 */
+	--foreground: #f4f4f5;   /* zinc-100 */
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: "Soehne", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── Base ────────────────────────────────────────────────── */
+html {
+	background: var(--background);
+	color: var(--foreground);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	min-height: 100dvh;
+}
+
+/* ─── Glow utilities ──────────────────────────────────────── */
+@layer utilities {
+	.bg-livd-lux { @apply bg-neutral-950; }
+
+	.overlay-livd-glow { @apply relative overflow-hidden isolate; }
+
+	.overlay-livd-glow::before {
+		content: "";
+		position: absolute;
+		inset: -50%;
+		pointer-events: none;
+		filter: blur(60px);
+		z-index: -1;
+	}
+
+	.overlay-livd-glow > * { position: relative; z-index: 1; }
+
+	.overlay-livd-glow.glow-tl::before {
+		background: radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.16), transparent 60%);
+	}
+	.overlay-livd-glow.glow-tr::before {
+		background: radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.16), transparent 60%);
+	}
+	.overlay-livd-glow.glow-center::before {
+		background: radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.15), transparent 62%);
+	}
+	.overlay-livd-glow.glow-bl::before {
+		background: radial-gradient(circle at 15% 85%, rgba(56, 189, 248, 0.14), transparent 62%);
+	}
+	.overlay-livd-glow.glow-br::before {
+		background: radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.14), transparent 62%);
+	}
+}

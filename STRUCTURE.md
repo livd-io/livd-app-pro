@@ -10,6 +10,8 @@ livd-app-pro/                          ← repo root
 ├── apps/
 │   ├── app/                           ← Main product application (Next.js 16 / App Router)
 │   │   ├── public/                    ← Static assets served at /
+│   │   │   ├── fonts/
+│   │   │   │   └── soehne/            ← Self-hosted Söhne .woff2 files (not committed; see README.md inside)
 │   │   │   ├── livd_logo.png          ← Livd logo (used on the login page)
 │   │   │   ├── file.svg
 │   │   │   ├── globe.svg
@@ -66,13 +68,16 @@ livd-app-pro/                          ← repo root
 │   │   └── tsconfig.json              ← TypeScript config (paths alias: @/ → src/)
 │   │
 │   └── marketing/                     ← Public marketing site (Next.js 16 / App Router)
+│       ├── public/
+│       │   └── fonts/
+│       │       └── soehne/            ← Self-hosted Söhne .woff2 files (not committed; see README.md inside)
 │       ├── src/
 │       │   └── app/                   ← Next.js App Router root
 │       │       ├── (marketing)/       ← Route group: all public marketing pages
 │       │       │   ├── layout.tsx     ← Marketing-specific layout wrapper
 │       │       │   └── page.tsx       ← / home page — "Livd Marketing — Coming soon"
-│       │       ├── globals.css        ← Tailwind base styles
-│       │       ├── layout.tsx         ← Root layout: sets fonts, wraps entire tree
+│       │       ├── globals.css        ← Tailwind base + Söhne @font-face + dark base + glow utilities
+│       │       ├── layout.tsx         ← Root layout: wraps entire tree
 │       │       └── not-found.tsx      ← Custom 404 page (uses Next.js <Link> for navigation)
 │       ├── .gitignore
 │       ├── eslint.config.mjs          ← ESLint 9 flat config (eslint-config-next core-web-vitals + typescript)
@@ -96,7 +101,7 @@ livd-app-pro/                          ← repo root
 |---|---|
 | **Monorepo style** | Independent apps, no shared packages yet. No Turborepo / Nx config at root level — CI runs each app's `npm ci` separately. |
 | **Framework** | Next.js 16 (App Router) with React 19 in both apps. |
-| **Styling** | Tailwind CSS v4 via the `@tailwindcss/postcss` plugin. Custom colour palette defined in `apps/app/tailwind.config.mjs`. |
+| **Styling** | Tailwind CSS v4 via the `@tailwindcss/postcss` plugin. Shared colour palette (`neutral` = zinc, `primary` = sky) and `font-sans` (Söhne) defined in both apps' `tailwind.config.mjs`. Glow utilities in `globals.css`. |
 | **Auth (app only)** | Supabase Auth via `@supabase/ssr`. Browser client in `src/lib/supabase/client.ts`, server client in `src/lib/supabase/server.ts`. Required env vars: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`. |
 | **RBAC (app only)** | Three roles: `SUPER_ADMIN`, `ADMIN`, `CUSTOMER`. Role type in `src/types/rbac.ts`. Navigation filtered per-role in `src/lib/nav.ts`. |
 | **Route groups** | `(app)` — authenticated shell; `(auth)` — login; `(public)` — root redirect. Parentheses are Next.js conventions and don't appear in the URL. |

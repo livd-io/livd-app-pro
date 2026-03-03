@@ -1,9 +1,5 @@
 # Livd App Pro
 
-CI verified on 27 February 2026.
-
-# Livd App Pro
-
 ## Requirements
 
 - Node.js 20+
@@ -11,9 +7,14 @@ CI verified on 27 February 2026.
 
 ## Local Development
 
+**Main app:**
 ```bash
-npm ci
-npm run dev
+cd apps/app && npm ci && npm run dev
+```
+
+**Marketing app:**
+```bash
+cd apps/marketing && npm ci && npm run dev
 ```
 
 ## Environment Variables
